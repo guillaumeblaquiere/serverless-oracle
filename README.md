@@ -207,13 +207,13 @@ That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 ```bash
 # Go to the directory
-cd nodejs
+cd python
 
 # Run Mvn command. Maven 3.5 or above must be installed
 gcloud app deploy app-flexible.yaml
 
 # Test your appEngin
-gcloud app browse -s nodejs-serverless-oracle-flex
+gcloud app browse -s python-serverless-oracle-flex
 ```
 
 ### Cloud Run
@@ -222,17 +222,17 @@ That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 ```bash
 # Go to the directory
-cd nodejs
+cd python
 
 # Run the build
 gcloud builds submit --config googlecloudbuild.yaml
 
 # Deploy on Cloud run (Change <PROJECT_ID> by your project ID)
-gcloud beta run deploy nodejs-serverless-oracle --region us-central1 --platform managed \
-    --allow-unauthenticated --image gcr.io/<PROJECT_ID>/nodejs-serverless-oracle
+gcloud beta run deploy python-serverless-oracle --region us-central1 --platform managed \
+    --allow-unauthenticated --image gcr.io/<PROJECT_ID>/python-serverless-oracle
 
 # Test your deployment
-curl $(gcloud beta run services describe nodejs-serverless-oracle --region us-central1 \
+curl $(gcloud beta run services describe python-serverless-oracle --region us-central1 \
     --format "value(status.address.hostname)" --platform managed)
 ```
 
