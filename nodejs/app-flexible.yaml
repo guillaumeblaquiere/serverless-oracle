@@ -1,0 +1,7 @@
+runtime: custom
+env: flex
+service: nodejs-serverless-oracle-flex
+
+network:
+  name: default
+  subnetwork_name: us-central1

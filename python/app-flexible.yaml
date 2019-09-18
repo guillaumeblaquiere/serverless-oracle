@@ -1,0 +1,7 @@
+runtime: custom
+env: flex
+service: python-serverless-oracle-flex
+
+network:
+  name: default
+  subnetwork_name: us-central1
