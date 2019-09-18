@@ -235,3 +235,8 @@ gcloud beta run deploy nodejs-serverless-oracle --region us-central1 --platform 
 curl $(gcloud beta run services describe nodejs-serverless-oracle --region us-central1 \
     --format "value(status.address.hostname)" --platform managed)
 ```
+
+# License
+
+This library is licensed under Apache 2.0. Full license text is available in
+[LICENSE](https://github.com/guillaumeblaquiere/serverless-oracle/tree/master/LICENSE).
