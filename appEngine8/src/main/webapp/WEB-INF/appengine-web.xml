@@ -2,4 +2,10 @@
     <runtime>java8</runtime>
     <service>java8-serverless-oracle</service>
     <threadsafe>true</threadsafe>
+    <env-variables>
+        <env-var name="ORACLE_IP" value="YOUR IP" />
+        <env-var name="ORACLE_SCHEMA" value="YOUR SCHEMA" />
+        <env-var name="ORACLE_USER" value="YOUR USER" />
+        <env-var name="ORACLE_PASSWORD" value="YOUR PASSWORD" />
+    </env-variables>
 </appengine-web-app>

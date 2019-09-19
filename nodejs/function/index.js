@@ -3,12 +3,12 @@ const oracledb = require('oracledb');
 exports.oracleConnection = async (req, res) => {
     let connection;
 
-    const oracle_ip = process.env.ORACLE_IP || "35.222.1.145";
-    const oracle_schema = process.env.ORACLE_SCHEMA || "xe";
+    const oracle_ip = process.env.ORACLE_IP;
+    const oracle_schema = process.env.ORACLE_SCHEMA;
 
     const dbConfig = {
-        user: process.env.ORACLE_USER || "system",
-        password: process.env.ORACLE_PASSWORD || "root",
+        user: process.env.ORACLE_USER,
+        password: process.env.ORACLE_PASSWORD,
         connectString: oracle_ip + ":1521/" + oracle_schema,
     }
 

@@ -24,11 +24,6 @@ public class OracleConnection extends HttpServlet { //extends only usefull for C
 
             Connection con = DriverManager.getConnection(
                     "jdbc:oracle:thin:@" + dbIp + ":1521:" + dbSchema, dbUser, dbPassword);
-/*
-TODO set env
-            Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@35.222.1.145:1521:xe", "system", "root");
-*/
 
             Statement stmt = con.createStatement();
 
