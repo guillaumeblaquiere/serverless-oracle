@@ -27,7 +27,7 @@ mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar \
 # Run Mvn command. Maven 3.5 or above must be installed
 mvn clean package appengine:deploy
 
-# Test your appEngin
+# Test your appEngine
 curl $(gcloud app browse -s java8-serverless-oracle \
     --no-launch-browser)
 ```
@@ -51,9 +51,26 @@ mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar \
 # Run Mvn command. Maven 3.5 or above must be installed
 mvn clean package appengine:deploy
 
-# Test your appEngin
+# Test your appEngine
 curl $(gcloud app browse -s java11-serverless-oracle \
     --no-launch-browser)   
+```
+
+### AppEngine flexible Java11
+For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+That's why, `googlecloudbuild.yaml` exists instead of the regular name
+
+Update the `app-flexible.yaml` with your env vars values
+```bash
+# Go to the directory
+cd java
+
+# Run Mvn command. Maven 3.5 or above must be installed
+gcloud app deploy app-flexible.yaml
+
+# Test your appEngine
+curl $(gcloud app browse -s java11-serverless-oracle-flex \
+    --no-launch-browser)
 ```
 
 ## Cloud Function Java
@@ -92,12 +109,15 @@ gcloud functions call oracle-serverless
 In the `pom.xml` files, change the `PROJECT_ID` value with your project id
 
 ### With Cloud Build
+For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+That's why, `googlecloudbuild.yaml` exists instead of the regular name
+
 ```bash
 # Go to the directory
 cd java
 
 # Run the build
-gcloud builds submit
+gcloud builds submit --config googlecloudbuild.yaml
 
 # Deploy on Cloud run 
 # Change <PROJECT_ID> by your project ID. Change the env vars by your values
@@ -168,7 +188,7 @@ Try this `gcloud app deploy app-standard.yaml` for validating that is doesn't wo
 For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
- Update the `app-flexible.yaml` with your env vars values
+Update the `app-flexible.yaml` with your env vars values
 ```bash
 # Go to the directory
 cd go
@@ -176,7 +196,7 @@ cd go
 # Run Mvn command. Maven 3.5 or above must be installed
 gcloud app deploy app-flexible.yaml
 
-# Test your appEngin
+# Test your appEngine
 curl $(gcloud app browse -s go-serverless-oracle-flex \
     --no-launch-browser)
 ```
@@ -326,7 +346,7 @@ cd python
 # Run Mvn command. Maven 3.5 or above must be installed
 gcloud app deploy app-flexible.yaml
 
-# Test your appEngin
+# Test your appEngine
 curl $(gcloud app browse -s python-serverless-oracle-flex \
     --no-launch-browser)
 ```
