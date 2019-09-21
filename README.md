@@ -14,8 +14,6 @@ AppEngine Java 8 requires specific dependencies and code structure which is not 
 
 Java directory is compliant AppEngine Standard Java11, AppEngine flex, Cloud Function, Cloud Run
 
-War packaging is used to embed the Oracle Jar in the deployment. Only Standard deployment is perform. It's enough and cheaper
-
 ```bash
 # Go to the directory
 cd appEngine8
