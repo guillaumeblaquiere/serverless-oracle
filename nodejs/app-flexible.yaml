@@ -1,0 +1,9 @@
+runtime: custom
+env: flex
+service: nodejs-serverless-oracle-flex
+
+env_variables:
+  ORACLE_IP: "<YOUR IP>"
+  ORACLE_SCHEMA: "<YOUR SCHEMA>"
+  ORACLE_USER: "<YOUR USER>"
+  ORACLE_PASSWORD: "<YOUR PASSWORD>"

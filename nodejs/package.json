@@ -1,0 +1,16 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Guillaume Blaquiere @gblaquiere",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "oracledb": "^4.0.1"
+  },
+  "description": ""
+}
