@@ -1,17 +1,17 @@
 # Overview
-This repository present the different way to contact an Oracle Database with GCP serverless Product.
+This repository present the different way to contact an Oracle database with GCP serverless Product.
 
-AppEngine standard and flex, Cloud Run and function are used. Except for AppEngine8, the 4 products are usable with the same source code.
+App Engine standard and flex, Cloud Run and function are used. Except for App Engine8, the 4 products are usable with the same source code.
 
 Think to customize the configuration files with your values.
 
 # Deployment and tests
 
 ## Java
-### AppEngine Java8
-AppEngine Java 8 requires specific dependencies and code structure which is not compliant with other GCP product.
+### App Engine Java8
+App Engine Java 8 requires specific dependencies and code structure which is not compliant with other GCP product.
 
-Java directory is compliant AppEngine Standard Java11, AppEngine flex, Cloud Run
+Java directory is compliant App Engine Standard Java11, App Engine flex, Cloud Run
 
 ```bash
 # Go to the directory
@@ -27,12 +27,12 @@ mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar \
 # Run Mvn command. Maven 3.5 or above must be installed
 mvn clean package appengine:deploy
 
-# Test your appEngine
+# Test your App Engine
 curl $(gcloud app browse -s java8-serverless-oracle \
     --no-launch-browser)
 ```
 
-### AppEngine Java11
+### App Engine Java11
 It's not a real Java11 version. It's a Java 8 but fully compliant with Java11 environment.
 
 Fat Jar mode is used to embed the Oracle Jar in the deployment. Only Standard deployment is perform. It's enough and cheaper
@@ -50,13 +50,13 @@ mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar \
 # Run Mvn command. Maven 3.5 or above must be installed
 mvn clean package appengine:deploy
 
-# Test your appEngine
+# Test your App Engine
 curl $(gcloud app browse -s java11-serverless-oracle \
     --no-launch-browser)   
 ```
 
-### AppEngine flexible Java11
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+### App Engine flexible Java11
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 Update the `app-flexible.yaml` with your env vars values
@@ -67,7 +67,7 @@ cd java
 # Run Mvn command. Maven 3.5 or above must be installed
 gcloud app deploy app-flexible.yaml
 
-# Test your appEngine
+# Test your App Engine
 curl $(gcloud app browse -s java11-serverless-oracle-flex \
     --no-launch-browser)
 ```
@@ -81,7 +81,7 @@ curl $(gcloud app browse -s java11-serverless-oracle-flex \
 In the `pom.xml` files, change the `PROJECT_ID` value with your project id
 
 ### With Cloud Build
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 ```bash
@@ -151,13 +151,13 @@ rm function/go.mod
 gcloud functions call go-oracle-serverless
 ```
 
-### AppEngine Standard
+### App Engine Standard
 Not applicable (no instant client)
 
 Try this `gcloud app deploy app-standard.yaml` for validating that is doesn't work. Update the `app-standard.yaml` with your env vars values
 
-### AppEngine Flexible
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+### App Engine Flexible
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 Update the `app-flexible.yaml` with your env vars values
@@ -168,13 +168,13 @@ cd go
 # Run Mvn command. Maven 3.5 or above must be installed
 gcloud app deploy app-flexible.yaml
 
-# Test your appEngine
+# Test your App Engine
 curl $(gcloud app browse -s go-serverless-oracle-flex \
     --no-launch-browser)
 ```
 
 ### Cloud Run
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 ```bash
@@ -224,14 +224,14 @@ rm function/package.json
 gcloud functions call nodejs-oracle-serverless
 ```
 
-### AppEngine Standard
+### App Engine Standard
 Not applicable (no instant client)
 
 Try this `gcloud app deploy app-standard.yaml` for validating that is doesn't work. Update the `app-standard.yaml` with your env vars values
 
 
-### AppEngine Flexible
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+### App Engine Flexible
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 Update the `app-flexible.yaml` with your env vars values
@@ -243,13 +243,13 @@ cd nodejs
 # Run Mvn command. Maven 3.5 or above must be installed
 gcloud app deploy app-flexible.yaml
 
-# Test your appEngine
+# Test your App Engine
 curl $(gcloud app browse -s nodejs-serverless-oracle-flex \
     --no-launch-browser)
 ```
 
 ### Cloud Run
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 ```bash
@@ -300,13 +300,13 @@ gcloud functions call python-oracle-serverless
 ```
 
 
-### AppEngine Standard
+### App Engine Standard
 Not applicable (no instant client)
 
 Try this `gcloud app deploy app-standard.yaml` for validating that is doesn't work. Update the `app-standard.yaml` with your env vars values
 
-### AppEngine Flexible
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+### App Engine Flexible
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 Update the `app-flexible.yaml` with your env vars values
@@ -318,13 +318,13 @@ cd python
 # Run Mvn command. Maven 3.5 or above must be installed
 gcloud app deploy app-flexible.yaml
 
-# Test your appEngine
+# Test your App Engine
 curl $(gcloud app browse -s python-serverless-oracle-flex \
     --no-launch-browser)
 ```
 
 ### Cloud Run
-For AppEngine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
+For App Engine flex with custom runtime, `Dockerfile` and `cloudbuild.yaml` file can't be in the same directory.
 That's why, `googlecloudbuild.yaml` exists instead of the regular name
 
 ```bash
