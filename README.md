@@ -159,7 +159,7 @@ However, if you want to tests
 
 ```bash
 # Go to the directory
-cd nodejs
+cd go
 
 # copy the dependencies close to the function file
 cp go.mod function/
