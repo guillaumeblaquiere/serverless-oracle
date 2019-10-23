@@ -1,5 +1,7 @@
 # Overview
 This repository present the different way to contact an Oracle database with GCP serverless Product.
+It's the base for [this medium article](https://medium.com/google-cloud/reach-oracle-db-in-serverless-271293f79861
+)
 
 App Engine standard and flex, Cloud Run and function are used. Except for App Engine8, the 4 products are usable with the same source code.
 
@@ -131,7 +133,7 @@ However, if you want to tests
 
 ```bash
 # Go to the directory
-cd nodejs
+cd go
 
 # copy the dependencies close to the function file
 cp go.mod function/
