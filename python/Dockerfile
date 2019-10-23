@@ -20,4 +20,4 @@ COPY . .
 ENV PORT 8080
 
 # Run the web service on container startup.
-CMD [ "python3", "server.py" ]
+CMD [ "python3", "main.py" ]
