@@ -74,10 +74,6 @@ curl $(gcloud app browse -s java11-serverless-oracle-flex \
     --no-launch-browser)
 ```
 
-## Cloud Function Java
-
-*This part will be populated when the Java Cloud Function will be in Beta. Alpha program don't allow to share details*
-
 ## Cloud Run Java
 
 In the `pom.xml` files, change the `PROJECT_ID` value with your project id
