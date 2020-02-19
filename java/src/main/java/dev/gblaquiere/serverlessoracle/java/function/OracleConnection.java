@@ -1,5 +1,10 @@
 package dev.gblaquiere.serverlessoracle.java.function;
 
+import com.google.cloud.functions.HttpFunction;
+import com.google.cloud.functions.HttpRequest;
+import com.google.cloud.functions.HttpResponse;
+import dev.gblaquiere.serverlessoracle.java.Helpers;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,11 +14,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class OracleConnection extends HttpServlet { //extends only usefull for Cloud Run
+public class OracleConnection extends HttpServlet implements HttpFunction { //extends only usefull for Cloud Run/AppEngine
+
+    public void service(HttpServletRequest request,
+                      HttpServletResponse response) throws IOException {
+        service(Helpers.createHttpRequest(request), Helpers.createHttpResponse(response));
+    }
 
     //With function, the name can be different. Not with Cloud Run. Here a GET request
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response) throws IOException {
+    @Override
+    public void service(HttpRequest request, HttpResponse response) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -28,15 +38,22 @@ public class OracleConnection extends HttpServlet { //extends only usefull for C
             Statement stmt = con.createStatement();
 
             ResultSet rs = stmt.executeQuery("select 'Great!' from dual");
-            while (rs.next())
-                response.getWriter().println(rs.getString(1));
+            while (rs.next()) {
+                response.getOutputStream().write(rs.getString(1).getBytes());
+                //FIXME  This line write nothing when use wrapped servlet response
+//                response.getWriter().write(rs.getString(1));
+            }
 
             con.close();
-            response.setStatus(HttpServletResponse.SC_OK);
+            response.setStatusCode(HttpServletResponse.SC_OK);
         } catch (Exception e) {
             System.out.println(e);
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().println(e.getMessage());
+            response.setStatusCode(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            try {
+                response.getWriter().write(e.getMessage());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
