@@ -14,7 +14,7 @@ import java.sql.Statement;
 public class OracleConnection extends HttpServlet { //extends only usefull for Cloud Run
 
     //With function, the name can be different. Not with Cloud Run. Here a GET request
-    public void doGet(HttpServletRequest request,
+    public void service(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");

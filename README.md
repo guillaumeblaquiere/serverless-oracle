@@ -17,11 +17,6 @@ Java directory is compliant AppEngine Standard Java11, AppEngine flex, Cloud Fun
 # Go to the directory
 cd appEngine8
 
-# Install manually the Oracle maven dependency (impossible to download automatically)
-mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar \
-    -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=1.0.0 \
-    -Dpackaging=jar
-
 # Update the file in src/main/webapp/WEB-INF/appengine-web.xml with your environment variables
 
 # Run Mvn command. Maven 3.5 or above must be installed
@@ -42,11 +37,6 @@ In the `pom.xml` files, change the `PROJECT_ID` value with your project id. In t
 ```bash
 # Go to the directory
 cd java
-
-# Install manually the Oracle maven dependency (impossible to download automatically)
-mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar \
-    -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=1.0.0 \
-    -Dpackaging=jar
 
 # Run Mvn command. Maven 3.5 or above must be installed
 mvn clean package appengine:deploy
@@ -81,22 +71,11 @@ Fat Jar mode is used to embed the Oracle Jar in the deployment
 # Go to the directory
 cd java
 
-# Install manually the Oracle maven dependency (impossible to download automatically)
-mvn install:install-file -Dfile=src/main/resources/ojdbc7.jar \
-    -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=1.0.0 \
-    -Dpackaging=jar
-
-# Package the fat jar
-mvn clean package
-
-# Delete the useless Jar in the Target directory
-rm target/original*
-
 # Deploy the alpha function
 # Change the env vars by your values
 gcloud alpha functions deploy oracle-serverless --trigger-http --region us-central1 \
-   --runtime java8 --source target --allow-unauthenticated \
-   --entry-point dev.gblaquiere.serverlessoracle.java.function.OracleConnection.doGet \
+   --runtime java11 --allow-unauthenticated \
+   --entry-point dev.gblaquiere.serverlessoracle.java.function.OracleConnection \
    --set-env-vars ORACLE_IP=<YOUR IP>,ORACLE_SCHEMA=<YOUR SCHEMA>,\
 ORACLE_USER=<YOUR USER>,ORACLE_PASSWORD=<YOUR PASSWORD>
 
@@ -121,13 +100,13 @@ gcloud builds submit --config googlecloudbuild.yaml
 
 # Deploy on Cloud run 
 # Change <PROJECT_ID> by your project ID. Change the env vars by your values
-gcloud beta run deploy java-serverless-oracle --region us-central1 --platform managed \
+gcloud run deploy java-serverless-oracle --region us-central1 --platform managed \
     --allow-unauthenticated --image gcr.io/<PROJECT_ID>/java-serverless-oracle \
     --set-env-vars ORACLE_IP=<YOUR IP>,ORACLE_SCHEMA=<YOUR SCHEMA>,\
 ORACLE_USER=<YOUR USER>,ORACLE_PASSWORD=<YOUR PASSWORD>
 
 # Test your deployment
-curl $(gcloud beta run services describe java-serverless-oracle --region us-central1 \
+curl $(gcloud run services describe java-serverless-oracle --region us-central1 \
     --format "value(status.address.hostname)" --platform managed)
 ```
 
@@ -141,13 +120,13 @@ mvn clean compile jib:build
 
 # Deploy on Cloud run 
 # Change <PROJECT_ID> by your project ID. Change the env vars by your values
-gcloud beta run deploy java-serverless-oracle --region us-central1 --platform managed \
+gcloud run deploy java-serverless-oracle --region us-central1 --platform managed \
     --allow-unauthenticated --image gcr.io/<PROJECT_ID>/java-serverless-oracle-jib \
     --set-env-vars ORACLE_IP=<YOUR IP>,ORACLE_SCHEMA=<YOUR SCHEMA>,\
 ORACLE_USER=<YOUR USER>,ORACLE_PASSWORD=<YOUR PASSWORD>
 
 # Test your deployment
-curl $(gcloud beta run services describe java-serverless-oracle-jib --region us-central1 \
+curl $(gcloud run services describe java-serverless-oracle-jib --region us-central1 \
     --format "value(status.address.hostname)" --platform managed)
 ```
 
@@ -214,13 +193,13 @@ gcloud builds submit --config googlecloudbuild.yaml
 
 # Deploy on Cloud run 
 # Change <PROJECT_ID> by your project ID. Change the env vars by your values
-gcloud beta run deploy go-serverless-oracle --region us-central1 --platform managed \
+gcloud run deploy go-serverless-oracle --region us-central1 --platform managed \
     --allow-unauthenticated --image gcr.io/<PROJECT_ID>/go-serverless-oracle \
     --set-env-vars ORACLE_IP=<YOUR IP>,ORACLE_SCHEMA=<YOUR SCHEMA>,\
 ORACLE_USER=<YOUR USER>,ORACLE_PASSWORD=<YOUR PASSWORD>
 
 # Test your deployment
-curl $(gcloud beta run services describe go-serverless-oracle --region us-central1 \
+curl $(gcloud run services describe go-serverless-oracle --region us-central1 \
     --format "value(status.address.hostname)" --platform managed)
 ```
 
@@ -289,13 +268,13 @@ gcloud builds submit --config googlecloudbuild.yaml
 
 # Deploy on Cloud run 
 # Change <PROJECT_ID> by your project ID. Change the env vars by your values
-gcloud beta run deploy nodejs-serverless-oracle --region us-central1 --platform managed \
+gcloud run deploy nodejs-serverless-oracle --region us-central1 --platform managed \
     --allow-unauthenticated --image gcr.io/<PROJECT_ID>/nodejs-serverless-oracle \
     --set-env-vars ORACLE_IP=<YOUR IP>,ORACLE_SCHEMA=<YOUR SCHEMA>,\
 ORACLE_USER=<YOUR USER>,ORACLE_PASSWORD=<YOUR PASSWORD>
 
 # Test your deployment
-curl $(gcloud beta run services describe nodejs-serverless-oracle --region us-central1 \
+curl $(gcloud run services describe nodejs-serverless-oracle --region us-central1 \
     --format "value(status.address.hostname)" --platform managed)
 ```
 
@@ -364,13 +343,13 @@ gcloud builds submit --config googlecloudbuild.yaml
 
 # Deploy on Cloud run 
 # Change <PROJECT_ID> by your project ID. Change the env vars by your values
-gcloud beta run deploy python-serverless-oracle --region us-central1 --platform managed \
+gcloud run deploy python-serverless-oracle --region us-central1 --platform managed \
     --allow-unauthenticated --image gcr.io/<PROJECT_ID>/python-serverless-oracle \
     --set-env-vars ORACLE_IP=<YOUR IP>,ORACLE_SCHEMA=<YOUR SCHEMA>,\
 ORACLE_USER=<YOUR USER>,ORACLE_PASSWORD=<YOUR PASSWORD>
 
 # Test your deployment
-curl $(gcloud beta run services describe python-serverless-oracle --region us-central1 \
+curl $(gcloud run services describe python-serverless-oracle --region us-central1 \
     --format "value(status.address.hostname)" --platform managed)
 ```
 
