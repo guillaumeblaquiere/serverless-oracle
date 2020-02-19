@@ -5,16 +5,17 @@ import (
 	"fmt"
 	_ "gopkg.in/goracle.v2"
 	"net/http"
+	"os"
 )
 
 func OracleConnection(w http.ResponseWriter, r *http.Request) {
 
 	dbIp := os.Getenv("ORACLE_IP")
 	dbSchema := os.Getenv("ORACLE_SCHEMA")
-    dbUser := os.Getenv("ORACLE_USER")
+	dbUser := os.Getenv("ORACLE_USER")
 	dbPassword := os.Getenv("ORACLE_PASSWORD")
 
-	db, err := sql.Open("goracle", dbUser + "/" + dbPassword + "@" + dbIp + ":1521/" + dbSchema)
+	db, err := sql.Open("goracle", fmt.Sprintf("%s/%s@%s:1521/%s", dbUser, dbPassword, dbIp, dbSchema))
 	if err != nil {
 		fmt.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
