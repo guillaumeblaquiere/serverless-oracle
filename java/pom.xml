@@ -28,6 +28,13 @@
            -->
         </dependency>
 
+        <dependency>
+            <groupId>com.google.cloud.functions.invoker</groupId>
+            <artifactId>java-function-invoker</artifactId>
+            <version>1.0.0-alpha-2-rc3</version>
+        </dependency>
+
+
         <!-- For Cloud Run embedded server. Useless for Cloud Function. Can optimize function deployment without these dependencies-->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>

@@ -1,8 +1,10 @@
 package dev.gblaquiere.serverlessoracle.java;
 
+import com.google.cloud.functions.invoker.NewHttpFunctionExecutor;
 import dev.gblaquiere.serverlessoracle.java.function.OracleConnection;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
 import static org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS;
 
@@ -20,7 +22,7 @@ public class ServletApplication {
         Server server = new Server(port);
 
         ServletContextHandler servletHandler = new ServletContextHandler(NO_SESSIONS);
-        servletHandler.addServlet(OracleConnection.class, "/");
+        servletHandler.addServlet(new ServletHolder(NewHttpFunctionExecutor.forClass(OracleConnection.class)), "/");
         server.setHandler(servletHandler);
 
         try {
